@@ -10,7 +10,7 @@ This html page contains a collection of UFO sightings within a set time frame. T
 
     - Using the search to narrow down results:
 
-        ![alt text](https://github.com/LJD0/UFOs/blob/main/static/images/before_search.png)
+        ![alt text](https://github.com/LJD0/UFOs/blob/main/static/images/before_search.png, raw=true)
 
         1. Type the criteria into the matching input field
 
@@ -18,7 +18,7 @@ This html page contains a collection of UFO sightings within a set time frame. T
 
     The table should auto populate with all rows that match the search parameters.
 
-        ![alt text](https://github.com/LJD0/UFOs/blob/main/static/images/after_search.png)
+        ![alt text](https://github.com/LJD0/UFOs/blob/main/static/images/after_search.png, raw=true)
 
 ### Summary:
 
