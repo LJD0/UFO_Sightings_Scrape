@@ -6,6 +6,10 @@ Tools Used
 	-Pandas
 	-Selenium
 	-BeautifulSoup
+	-Javascript
+	-DataTables
+	-HTML
+	-CSS
 
 A collection of UFO sightings scraped from https://nuforc.org/
 
