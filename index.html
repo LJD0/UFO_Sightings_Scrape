@@ -1,86 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>UFO Finder</title>
-        <link
-            rel="stylesheet"
-            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-            integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-            crossorigin="anonymous"/>
-        <link rel="stylesheet" href="static/css/style.css">
-    </head>
-    <body class="bg-dark">
-        <div class="wrapper">
-            <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
-                <a class="navbar-brand" href="index.html">UFO Sightings</a>
-            </nav>
-            <div class="jumbotron">
-                <h1 class="display-4">The Truth Is Out There</h1>
-            </div>
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-4">
-                        <h3>UFO Sightings: Fact or Fancy? <small>Ufologists Weigh In</small></h3>
-                    </div>
-                    <div class="col-md-8">
-                        <p>Are we alone in the universe? For millennia, humans have turned to the sky to answer this question. Now, thanks to research generously funded by W. Avy, a UFO-enthusiast and amateur ufologist, we can supplement our sky-searching with data analysis. "The release of this analysis is well-timed: It coincides with the celebration of World UFO Day, which is a moment for ufologists around the world to connect, relax, and sample a range of UFO-themed snacks," said Dr. Ursula F. Olivier, the world's preeminent expert on circular sightings. "Citizen-scientists can be especially helpful in both cataloguing sightings—which is hugely helpful for us in our search for aliens—and in helping us celebrate the work that has already been done, such as this data visualization project, which will help us raise awareness of the ubiquity of sightings!" Not everyone is ready to celebrate, however. Local CEO and vocal anti-alien activist V. Isualize reached out to our reporters to go on record as firmly opposed to any attempts to provide access to this data. "If there are aliens, they certainly would like to be left alone," she stated, before directing us to the Leave Aliens Alone (LAA) community engagement initiative she founded and funds. So what do YOU think? Are we alone in the universe? Are aliens trying to contact us, or do they want to be left alone? Dig through the data yourself, and let us know what you see.
-                        </p>
-                    </div>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UFO Sightings</title>
+
+    <script
+    src="https://code.jquery.com/jquery-3.7.0.js"
+    integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+    crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+    <script src="//cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="static/js/data.js"></script>
+
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+
+  <script>
+ $(document).ready(function() {
+    let dataSet = data;
+    let table = $('#ufotable').DataTable({
+        data: dataSet,
+        autoWidth: false,
+        columns: [
+            { data: "Posted", width: "10%", searchable: false},
+            { data: "City", width: "10%", searchable: true },
+            { data: "State", width: "10%", searchable: true},
+            { data: "Country", width: "10%", searchable: true },
+            { data: "Shape", width: "10%", searchable: false },
+            { data: "Duration", width: "10%", searchable: false },
+            { data: "Summary", width: "10%", searchable: false },
+            { data: "Images", width: "10%", searchable: false},
+        ]
+    });
+
+    // Create a separate search input field for each column
+    $('#ufotable thead th.searchable').each(function() {
+        var title = $(this).text();
+        $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+    });
+
+    // Apply the search when the user types in a search input field
+    table.columns().every(function() {
+        var that = this;
+        $('input', this.header()).on('keyup change', function() {
+            if (that.search() !== this.value) {
+                that.search(this.value).draw();
+            }
+        });
+    });
+});
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col s12">
+        <nav class="nav-wrapper">
+          <a href="index.html" class="" style="font-size: 20px; font-family: 'Montserrat'; color: white">UFO Sightings</a>
+        </nav>
+      </div>
+    </div>
+  </div>
+  
+    <div class="jumbotron">
+        <h1 class="display-4">The Truth Is Out There</h1>
+        <p style="padding-left: 10%; padding-right: 10%;">
+          "There is a serious possibility that we are being visited and have been visited for many years by people from outer space, from other civilizations. That it behooves us, in case some of these people in the future or now should turn hostile, to find out who they are, where they come from, and what they want. This should be the subject of rigorous scientific investigation and not the subject of 'rubishing' by tabloid newspapers." <br>- Lord Admiral Hill-Norton, former Chief of Defense Staff, United Kingdom
+        </p>
+    </div>
+<div class="container-fluid" style="padding-left: 10%; padding-right: 10%;">
+  <section class="intro">
+    <div class="bg-image h-100" style="background-color: #f5f7fa;">
+      <div class="mask d-flex align-items-center h-100">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-12">
+              <div class="card shadow-2-strong">
+                <div class="card-body p-0">
+                  <div class="table-responsive table-scroll" data-mdb-perfect-scrollbar="true" style="position: relative;">
+                    <table id="ufotable" class="table stripe mb-0">
+                      <thead style="background-color: #393939;">
+                        <tr class="text-uppercase text-success">
+                          <th scope="col">Date Posted</th>
+                          <th scope="col">City</th>
+                          <th scope="col">State</th>
+                          <th scope="col">Country</th>
+                          <th scope="col">Shape</th>
+                          <th scope="col">Duration</th>
+                          <th scope="col">Summary</th>
+                          <th scope="col">Images</th>
+                        </tr>
+                      </thead>
+                      <tbody style="background-color: #393939;">
+                      
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
+              </div>
             </div>
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-3">
-                        <form class="bg-dark">
-                            <p>Filter Search</p>
-                            <ul class="list-group bg-dark" id="filters">
-                                <li class="list-group-item bg-dark">
-                                    <label for="city">City</label>
-                                    <input type="text" placeholder="grants pass" id="city" />
-                                </li>
-                                <li class="list-group-item bg-dark">
-                                    <label for="state">State</label>
-                                    <input type="text" placeholder="ca" id="state" />
-                                </li>
-                                <li class="list-group-item bg-dark">
-                                    <label for="country">Country</label>
-                                    <input type="text" placeholder="us" id="country" />
-                                </li>
-                                <li class="list-group-item bg-dark">
-                                    <label for="shape">Shape</label>
-                                    <input type="text" placeholder="triangle" id="shape" />
-                                </li>
-                                <li class="list-group-item bg-dark">
-                                    <label for="date">Enter Date</label>
-                                    <input type="text" placeholder="1/10/2010" id="datetime" />
-                                </li>
-                            </ul>
-                        </form>
-                    </div>
-                    <div class="col-md-9">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Date</th>
-                                    <th>City</th>
-                                    <th>State</th>
-                                    <th>Country</th>
-                                    <th>Shape</th>
-                                    <th>Duration</th>
-                                    <th>Comments</th>
-                                </tr>
-                            </thead>
-                            <tbody></tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.12.0/d3.js"></script>
-        <script src="static/js/data.js"></script>
-        <script src="static/js/app.js"></script>
-    </body>
+      </div>
+    </div>
+  </section>
+</div>
+</body>
+<link rel="stylesheet" href="static/CSS/style.css">
 </html>
