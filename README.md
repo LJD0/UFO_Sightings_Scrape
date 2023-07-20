@@ -13,7 +13,11 @@ Tools Used
 
 A collection of UFO sightings scraped from https://nuforc.org/
 
-Check out the sightings at https://ljd0.github.io/UFO_Sightings_Scrape/
-
 This data can be searched by city, state, country, and shape.
+
+Check out the sightings @
+
+https://ljd0.github.io/UFO_Sightings_Scrape/
+
+https://www.larsenj.com/ufos
 
